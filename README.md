@@ -1,17 +1,15 @@
 # Pause-Process
-PowerShell script which allows pausing\unpausing Win32/64 exes
+PowerShell script which allows pausing\unpausing\toggle Win32/64 exes
 
 ## Prerequisites
-
 Windows PowerShell v 3+ (it may work on v 2, but no promise)
 
-
 ## Getting Started
-
 1) Download the pause-process.ps1 file.
 2) From a PowerShell prompt, load the module.
 
 ```
+curl https://raw.githubusercontent.com/TheWoodsy/Pause-Process/master/pause-process.ps1 -O pause-process.ps1
 Import-Module .\pause-process.ps1
 ```
 
@@ -21,9 +19,7 @@ Note: Depending on your system's configuration, you may need to modify your exec
 powershell -ep bypass
 ```
 
-
 ## About the cmdlet
-
 Pause-Process allows one to pause an executable and unpause (resume) it.
 
 Pause-Process allows defenders to pause a running executable, conduct forensics analysis and then either resume execution via the UnPause-Process method, or if it truly is malicious, simply halt the process.
@@ -37,13 +33,9 @@ Be aware that attackers will likely use this technique against your system.  By 
 
 ## Using this cmdlet
 This cmdlet is designed to accept a process ID as a mandatory parameter. The argument -ID is is optional, but supplying a PID is not.  
-
 The commands do support -Verbose mode which will give additional information on what is happening as the process is being paused/unpaused. 
-
 While the examples below are given as PowerShell "one liners" they can absolutely be part of a larger script or framework.
-
 Below are examples of how one could use it in the "real world"
-
 
 ### Scenario 1: Specific Known PID
 You already know the PID of the process you want to pause.  (ex. process id 1337)
@@ -59,6 +51,10 @@ UnPause-Process -ID 1337
 ```
 NOTE: this is the only example of where we show UnPause-Process. Its use is identical to Pause-Process.
 
+To toggle the process:
+```
+TogglePause-Process -ID 1337
+```
 
 ### Scenario 2: All Instances of a Program
 You want to pause all running instances of a specific program. (ex. notepad.exe)
@@ -67,7 +63,6 @@ To pause all notepad instances:
 ```
 get-process -Name notepad | Pause-Process
 ```
-
 
 ### Scenario 3: Specific User
 You want to pause all processes run by a specific user (ex bob)
@@ -79,12 +74,10 @@ Get-Process -IncludeUserName | where-object UserName -like "*bob*" | Pause-Proce
 ```
 Note: using -IncludeUserName requires Admin rights.
 
-
 ### Scenario 4: Network Connections
 To pause all processes that are connecting to a specific IP. For instance, you see interaction with a known command and control (c2) server.
 
 This is how you would pause executables affiliated with a TCP based connection to a specific IP
-
 ```
 Get-NetTCPConnection | where RemoteAddress -eq [IP] | select OwningProcess | Pause-Process
 ```
@@ -96,48 +89,35 @@ Note: all of the pause/unpause examples above will work with these special cases
 
 ### Special Scenario 1: 
 You want to pause process ID 1337 for only 30 seconds, and then have it resume.
-
 ``` 
 Pause-Process -ID 1337; sleep 30; UnPause-Process 1337
 ``` 
 
 
 ## Authors
-
 * **Mick Douglas** - *Initial release* - @BetterSafetyNet
+* https://github.com/stahler/Pause-Process
+* **Michael Woods** - *This* - @TheWoodsy
 
 ## License
-
 This project is licensed under the Creative Commons Attribution License https://creativecommons.org/licenses/by/4.0/
-
 
 ## TODOs & Requests for help
 Here's my TODO list.  I'll work on them... but if you beat me to it, you'll get full credit.  Bottom line, I'd love assistance of any sort on this project.  
-
 * Make a function that checks to see if a debug has already been attached to a specific process.
-
 * Create a test/check to see if the user running the script has debug permissions.
-
 * Make this tool work with PowerShell's ScheduleJob or ScheduleTask.  The problem I've always run into is making the script work in default PowerShell sessions.  Yes, I know you can permanently install a module.  Is there a way to avoid this?  Using sleep commands with a ";" command separator (see Special Scenario 1) feels... awkward.  (it totally works though!!)
- 
-
 
 ## Help Requests:
 I sure could use your help! From code, to documentation, to testing, there's something you can do to help.  You, yes you! I need ** YOUR ** help!
-
 * Does this tool work on your system?  Do each of the scenarios work as expected?
-
 * Do you have a scenario I've not listed?  Is there something else I should cover?
-
 * What additional documentation is needed?   
-
 * Are there other features you'd like to see?
-
 * If there's a better way of organizing the scenarios please let me know.
 
 
 ## Acknowledgments
-
 * Thanks Dave Kennedy for pointing me to the API (via a stackoverflow article no less!)
 * Matt Graeber for tipping me off to how easy DLL imports actually were
 * Adam Crompton for initial testing, encouragement, and feature suggestions
