@@ -95,33 +95,9 @@ Process-Pause -ID 1337; sleep 30; Process-UnPause 1337
 
 
 ## Authors
-* **Mick Douglas** - *Initial release* - @BetterSafetyNet
-* https://github.com/stahler/Pause-Process
 * **Michael Woods** - *This* - @TheWoodsy
+* https://github.com/stahler/Pause-Process
+* **Mick Douglas** - *Initial release* - @BetterSafetyNet
 
 ## License
 This project is licensed under the Creative Commons Attribution License https://creativecommons.org/licenses/by/4.0/
-
-*old readme stuff below*
-## TODOs & Requests for help
-Here's my TODO list.  I'll work on them... but if you beat me to it, you'll get full credit.  Bottom line, I'd love assistance of any sort on this project.  
-* Make a function that checks to see if a debug has already been attached to a specific process.
-* Create a test/check to see if the user running the script has debug permissions.
-* Make this tool work with PowerShell's ScheduleJob or ScheduleTask.  The problem I've always run into is making the script work in default PowerShell sessions.  Yes, I know you can permanently install a module.  Is there a way to avoid this?  Using sleep commands with a ";" command separator (see Special Scenario 1) feels... awkward.  (it totally works though!!)
-
-## Help Requests:
-I sure could use your help! From code, to documentation, to testing, there's something you can do to help.  You, yes you! I need ** YOUR ** help!
-* Does this tool work on your system?  Do each of the scenarios work as expected?
-* Do you have a scenario I've not listed?  Is there something else I should cover?
-* What additional documentation is needed?   
-* Are there other features you'd like to see?
-* If there's a better way of organizing the scenarios please let me know.
-
-
-## Acknowledgments
-* Thanks Dave Kennedy for pointing me to the API (via a stackoverflow article no less!)
-* Matt Graeber for tipping me off to how easy DLL imports actually were
-* Adam Crompton for initial testing, encouragement, and feature suggestions
-* Ed Skoudis for feature suggestions
-* Rob Fuller for suggesting that I buckle down and make this readme! 
-* My wife, for tolerating my obsessive coding on this.
